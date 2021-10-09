@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>یادداشت ها</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+    <link rel="stylesheet" href="style.css">
+    <div id="myDIV" class="header">
+        <h2 style="margin:20px">
+        </h2>
+        <input type="text" id="myInput" placeholder="بنویسید...">
+        <span onclick="newElement()" class="addBtn">+</span>
+      </div>
+        <ul id="myUL">
+        </ul> 
+      
+
+
+   <!-- بدنه js-->
+      <script>
+      var myNodelist = document.getElementsByTagName("LI");              // دکمه بسته شدن برای هر آیتم داخل لیست
+      var i;
+      for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+      }
+      
+      var close = document.getElementsByClassName("close");           // وقتی دکمه بسته شدن فعال شد لیست را حذف کن
+      var i;
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+      
+      var list = document.querySelector('ul');                   // نگاه که کرد,تایید بشود
+      list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+          ev.target.classList.toggle('checked');
+        }
+      }, false);
+      
+
+      function newElement() {   // آیتم جدید اد کن
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("myInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+          alert("مطلبی را وارد کنید");
+        } else {
+          document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+      
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+      
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+          }
+        }
+      }
+      </script>
+      
+    </body>
+</html>
+
+
